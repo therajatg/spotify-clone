@@ -31,7 +31,7 @@ export const MyUserContextProvider = (props: Props) => {
 
   const user = useSupaUser();
   const accessToken = session?.access_token ?? null;
-  const [isLoadingData, setIsLoadingData] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
 
@@ -44,7 +44,7 @@ export const MyUserContextProvider = (props: Props) => {
       .single();
 
   useEffect(() => {
-    //if user is authenticated
+    //if user is authenticated that we are logged in but we are not showing the loader and we have not loaded the userdetails and susbscription.
     if (user && !isLoadingData && !userDetails && !subscription) {
       setIsLoadingData(true);
 
@@ -88,3 +88,5 @@ export const useUser = () => {
   }
   return context;
 };
+
+//This is a very important using which we can fetch subscriptions and userDetails at the same time.
